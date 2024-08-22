@@ -19,6 +19,7 @@
     "changelog": "bump changelog generate --config .bumprc.json",
     "dev": "concurrently -n \"NEXT,ELECTRON\" -c \"white,blue\" --kill-others \"pnpm run frontend:dev\" \"wait-on http://localhost:3000/ && pnpm run backend:dev\"",
     "build": "pnpm run frontend:build && pnpm run backend:build && electron-builder",
+    "build:changelog": "bump changelog generate --config .bumprc.json",
     "prepare": "husky"
   },
   "dependencies": {
