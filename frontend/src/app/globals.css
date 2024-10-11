@@ -202,18 +202,25 @@
     --success:     92 28% 65%;  /* #a3be8c */
     --info:        213 32% 52%; /* #5e81ac */
     --primary:        210 34% 63%; /* #81a1c1 */
+
+        --newspaper-light: 0 0% 45%;
+    --newspaper-muted: 180 1% 30%;
+    --newspaper-gray: 0 0% 60%;
   }
 
   .light {
     --background: 0 0% 97%;
-    --foreground-light: 0 0% 25%;
-    --foreground-lighter: 0 0% 50%;
+    --foreground-light: 0 0% 40%;
     --foreground: 0 0% 7%;
     
     --foreground: var(--neutral-600);
-    --foreground: 0 0% 32%;
-    --foreground: 0 0% 20%;
+    --foreground: 0 0% 23%;
 
+    
+    --foreground-light: var(--newspaper-light);
+    --foreground-light: 0 0% 35%;
+    --foreground-lighter: 0 0% 60%;
+    
     /* --foreground-muted:var(--colors-gray-dark-900);
     --foreground-lighter:var(--colors-gray-dark-1000);
     --foreground-light:var(--colors-gray-dark-1100);
@@ -225,8 +232,9 @@
     --secondary: 240 4.8% 90.0%;
     --secondary-foreground: 240 5.9% 10%;
     --accent: 240 4.8% 95.9%;
+    --accent: 240 4.8% 94.0%;
     --accent-foreground: 240 5.9% 10%;
-    --muted: 0 0% 87%;
+    --muted: 0 0% 90%;
     --muted-foreground: var(--foreground-lighter);
     --card: 0 0% 100%;
     --card-foreground: var(--foreground-light);
@@ -247,15 +255,21 @@
   }
 
   .dark {
+    /* --background:var(--colors-gray-dark-200); */
+    --background:  240 6% 10%;
     --background: 0 0% 9%;
-  /* --background:var(--colors-gray-dark-200); */
     --foreground: 0 0% 93%;
-    --foreground-light: 0 0% 63%;
-    --foreground-lighter: 0 0% 49%;
+    --foreground-light: 0 0% 70%;
+    --foreground-lighter: 0 0% 50%;
+
+
+    --foreground-light: var(--newspaper-gray);
 
   --foreground-muted:var(--colors-gray-dark-900);
   --foreground-lighter:var(--colors-gray-dark-1000);
   --foreground-light:var(--colors-gray-dark-1100);
+    --foreground-light: 0 0% 63%;
+    --foreground-lighter: 0 0% 40%;
   /* --foreground:var(--colors-gray-dark-1200) */
 
     --primary-foreground: 60 0% 0%;
@@ -282,12 +296,18 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

@@ -1,8 +1,10 @@
+import { cn } from '@/lib/utils';
+
 export type UnorderedListProps = JSX.IntrinsicElements['ul'];
 
-export function UnorderedList(props: UnorderedListProps): JSX.Element {
+export function UnorderedList({ className, ...props }: UnorderedListProps): JSX.Element {
   return (
-    <ul className='my-6 ml-6 list-disc [&>li]:mt-2' {...props}>
+    <ul className={cn('my-6 ml-6 list-disc [&>li]:mt-2', className)} {...props}>
       {props.children}
     </ul>
   );

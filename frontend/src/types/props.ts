@@ -13,19 +13,3 @@ export type PageProps = {
   params: ParamsObject;
   searchParams: ParamsObject;
 };
-
-export type SlugPageProps<Keys extends string = 'slug'> = {
-  params: {
-    [key in Keys]: string;
-  };
-
-  searchParams: ParamsObject;
-};
-
-export type SlugLayoutProps<Keys extends string = 'slug'> = {
-  params: {
-    [key in Keys]: string;
-  };
-
-  children: React.ReactNode;
-};

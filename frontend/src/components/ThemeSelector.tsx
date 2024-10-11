@@ -1,56 +1,38 @@
 'use client';
 
-import { IconButton } from '@/components/ui/Button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/Tooltip';
-import { MoonIcon, SunIcon } from 'lucide-react';
-
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/Select';
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
 
-export function ThemeSelector(): JSX.Element {
-  const { setTheme, theme: currentTheme } = useTheme();
-  const [openToolTip, setOpenToolTip] = useState(false);
-
-  const themes = [
-    {
-      name: 'Light',
-      onclick: () => setTheme('dark'),
-    },
-    {
-      name: 'Dark',
-      onclick: () => setTheme('system'),
-    },
-    {
-      name: 'System',
-      onclick: () => setTheme('light'),
-    },
-  ];
-
-  const theme =
-    themes.find((t) => t.name.toLowerCase() === currentTheme?.toLowerCase()) || themes[2];
+export function ThemeSelector() {
+  const { theme, setTheme } = useTheme();
 
   return (
-    <TooltipProvider>
-      <Tooltip open={openToolTip}>
-        <TooltipTrigger
-          asChild
-          onMouseEnter={() => setOpenToolTip(true)}
-          onMouseLeave={() => setOpenToolTip(false)}
-        >
-          <IconButton
-            onClick={theme.onclick}
-            size='small'
-            className='text-foreground-light hover:text-foreground'
-          >
-            <SunIcon className='dark:-rotate-90 size-4 rotate-0 scale-100 transition-all dark:scale-0' />
-            <MoonIcon className='absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
-            <span className='sr-only'>Toggle theme</span>
-          </IconButton>
-        </TooltipTrigger>
-        <TooltipContent side='left'>
-          <p>{`Theme: ${theme.name} Mode`}</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Select
+      value={theme}
+      onValueChange={(newTheme) => {
+        if (newTheme !== theme) {
+          setTheme(newTheme);
+        }
+      }}
+    >
+      <SelectTrigger className='w-[180px]'>
+        <SelectValue placeholder='Select a theme' />
+      </SelectTrigger>
+
+      <SelectContent>
+        <SelectGroup>
+          <SelectItem value='light'>Light</SelectItem>
+          <SelectItem value='dark'>Dark</SelectItem>
+          <SelectItem value='system'>System</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   );
 }

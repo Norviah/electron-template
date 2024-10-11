@@ -4,34 +4,30 @@ import { cn } from '@/lib/utils';
 import { cva } from 'class-variance-authority';
 
 import type { VariantProps } from 'class-variance-authority';
-import type { LucideIcon } from 'lucide-react';
+import { type LucideIcon, SearchIcon } from 'lucide-react';
 import type { RequireExactlyOne } from 'type-fest';
 
 import * as React from 'react';
 
 const buttonVariants = cva(
-  'relative justify-center inline-flex items-center text-center font-regular ease-out duration-200 rounded-md outline-none transition-all outline-0 focus-visible:outline-4 focus-visible:outline-offset-1 focus-visible:outline-success data-[state=open]:bg-selection data-[state=open]:outline-success data-[state=open]:border-button-hover text-xs',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default:
-          'hover:bg-foreground/[.08] bg-background dark:bg-muted dark:hover:bg-muted/90 text-foreground dark:hover:bg-muted/90 border border-strong shadow-sm',
-        primary:
-          'hover:bg-primary/85 bg-primary text-primary-foreground border border-strong shadow-sm',
-        destructive:
-          'hover:bg-destructive/85 bg-destructive text-destructive-foreground border border-strong shadow-sm',
-        info: 'bg-info text-info-foreground hover:bg-info/85 border border-strong shadow-sm',
-        success:
-          'bg-success text-success-foreground hover:bg-success/85 border border-strong shadow-sm',
-        warn: 'bg-warn text-warn-foreground hover:bg-warn/70 border border-strong shadow-sm',
-        secondary:
-          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 border border-strong shadow-sm',
-        ghost: 'hover:bg-accent hover:text-accent-foreground ',
+        default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
+        destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
+        info: 'bg-info text-info-foreground shadow-sm hover:bg-info/90',
+        success: 'bg-success text-success-foreground shadow-sm hover:bg-success/90',
+        warn: 'bg-warn text-warn-foreground shadow-sm hover:bg-warn/90',
         outline:
-          'hover:bg-foreground/[.08] bg-background dark:hover:bg-muted/90 text-foreground dark:hover:bg-muted/90 border border-strong',
+          'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+        secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+        ghost:
+          'hover:bg-accent hover:text-accent-foreground hover:text-foreground transition-colors',
+        link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
-        default: 'h-9 px-2.5 py-1',
+        default: 'h-9 px-4 py-2',
         sm: 'h-8 rounded-md px-3 text-xs',
         lg: 'h-10 rounded-md px-8',
         icon: 'h-9 w-9 p-0',
@@ -61,20 +57,20 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = 'Button';
 
-export type IconButtonProps = Omit<ButtonProps, 'size'> &
+export type IconButtonProps = ButtonProps &
   RequireExactlyOne<
     {
       children: React.ReactNode | React.ReactNode[];
       icon: LucideIcon;
-      size?: 'icon' | 'small';
+      size?: 'icon' | 'smallIcon';
     },
     'icon' | 'children'
   >;
 
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ icon: Icon, children, size = 'icon', ...props }, ref) => {
+  ({ className, icon: Icon, children, size = 'icon', ...props }, ref) => {
     return (
-      <Button variant='outline' size={size === 'small' ? 'smallIcon' : size} ref={ref} {...props}>
+      <Button variant='outline' size={size} ref={ref} {...props}>
         {Icon ? <Icon className='size-4' /> : children}
       </Button>
     );
@@ -82,4 +78,4 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
 );
 IconButton.displayName = 'IconButton';
 
-export { Button, buttonVariants, IconButton };
+export { IconButton, Button, buttonVariants };

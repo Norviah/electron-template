@@ -2,7 +2,6 @@ import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 import type { ClassValue } from 'clsx';
-import type { Route } from 'next';
 
 /**
  * A utility function that is a wrapper around the the `clsx` and

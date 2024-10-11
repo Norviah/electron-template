@@ -1,4 +1,4 @@
-import { Inter, Overpass, Roboto } from 'next/font/google';
+import { Overpass } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const brandonGrotesque = localFont({
@@ -69,16 +69,4 @@ export const brandonGrotesque = localFont({
 export const overpass = Overpass({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '600', '700', '800', '900'],
-});
-
-export const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['100', '300', '400', '500', '700', '900'],
-});
-
-export const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-  preload: true,
 });
