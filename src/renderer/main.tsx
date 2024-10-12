@@ -13,7 +13,7 @@ import { StrictMode } from 'react';
 import { ThemeProvider } from './components/ThemeProvider';
 import { ThemeSelector } from './components/ThemeSelector';
 
-import './base.css';
+import './globals.css';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -53,8 +53,6 @@ const aboutRoute = createRoute({
       <div className='p-2'>
         <div className='space-y-2'>
           <ThemeSelector />
-
-          {/* const ipcHandle = (): void => window.electron.ipcRenderer.send('ping') */}
 
           <button
             className='bg-card p-3'

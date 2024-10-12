@@ -5,7 +5,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from './Select';
+} from './ui/Select';
 import { useTheme } from 'next-themes';
 
 export function ThemeSelector() {
