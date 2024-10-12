@@ -4,7 +4,7 @@
     "src/preload/*.d.ts", 
     "src/renderer/**/*.d.ts",
     "src/renderer/**/*.tsx",
-    "src/renderer/**/*.tsx",
+    "src/renderer/**/*.ts",
     "src/renderer/components",
     "src/renderer/lib" 
   ],
@@ -12,6 +12,7 @@
     "composite": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
+    "moduleResolution": "Bundler",
     "paths": {
       "@renderer/*": [
         "src/renderer/*"
