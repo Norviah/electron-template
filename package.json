@@ -15,6 +15,7 @@
     "build:mac": "electron-vite build && electron-builder --mac",
     "build:linux": "electron-vite build && electron-builder --linux",
     "dev": "electron-vite dev",
+    "dev:watch": "electron-vite dev --watch",
     "format": "biome format ./src",
     "format:write": "biome format ./src --write",
     "lint": "biome lint ./src",
