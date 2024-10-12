@@ -1,14 +1,17 @@
-import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+
 import {
+  Link,
   Outlet,
   RouterProvider,
-  Link,
-  createRouter,
-  createRoute,
   createRootRoute,
+  createRoute,
+  createRouter,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import { StrictMode } from 'react';
+import { ThemeProvider } from './components/ThemeProvider';
+import { ThemeSelector } from './components/ThemeSelector';
 
 import './base.css';
 
@@ -46,7 +49,25 @@ const aboutRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/about',
   component: function About() {
-    return <div className='p-2'>Hello from About!</div>;
+    return (
+      <div className='p-2'>
+        <div className='space-y-2'>
+          <ThemeSelector />
+
+          {/* const ipcHandle = (): void => window.electron.ipcRenderer.send('ping') */}
+
+          <button
+            className='bg-card p-3'
+            type='button'
+            onClick={() => {
+              window.electron.ipcRenderer.send('ping');
+            }}
+          >
+            ping
+          </button>
+        </div>
+      </div>
+    );
   },
 });
 
@@ -60,12 +81,19 @@ declare module '@tanstack/react-router' {
   }
 }
 
-const rootElement = document.getElementById('root')!;
+const rootElement = document.getElementById('root');
+
+if (!rootElement) {
+  throw new Error('No root element found');
+}
+
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </StrictMode>,
   );
 }
