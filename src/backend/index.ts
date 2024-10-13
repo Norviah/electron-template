@@ -1,7 +1,11 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
-import { join } from 'path'
+import { app, shell, BrowserWindow,  } from 'electron'
+import { join } from 'node:path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
+import icon from "../../resources/icon.png"
+
+import {createIPCHandler} from "electron-trpc/main"
+import { appRouter } from '@shared/trpc/routers'
+import { createContext } from '@shared/trpc/context'
 
 function createWindow(): void {
   // Create the browser window.
@@ -14,8 +18,20 @@ function createWindow(): void {
     webPreferences: {
       preload: join(__dirname, '../preload/preload.js'),
       sandbox: false
-    }
+    },
+
+
   })
+
+    // create and attach the ipc handler
+  // appRouter is defined in src/shared/routers/_app.ts
+  // this is the root and all routers will be attached
+  // to that
+  createIPCHandler({
+    router: appRouter,
+    windows: [mainWindow],
+    createContext
+  });
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -50,7 +66,7 @@ app.whenReady().then(() => {
   })
 
   // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
+  // ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()
 

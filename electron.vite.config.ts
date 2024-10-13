@@ -12,6 +12,13 @@ export default defineConfig({
       lib: {
         entry: "src/backend/index.ts"
       },
+    },
+    resolve: {
+      alias: {
+        '@frontend': resolve('src/frontend'),
+        '@backend': resolve('src/backend'),
+        '@shared': resolve('src/shared'),
+      }
     }
   },
   preload: {
@@ -26,7 +33,9 @@ export default defineConfig({
     root: "src/frontend",
     resolve: {
       alias: {
-        '@frontend': resolve('src/frontend')
+        '@frontend': resolve('src/frontend'),
+        '@backend': resolve('src/backend'),
+        '@shared': resolve('src/shared'),
       }
     },
     build: {
