@@ -526,7 +526,7 @@ function Demo(): JSX.Element {
               ghost
             </Button>
 
-            <IconButton size='small' icon={CopyIcon} />
+            <IconButton size='smallIcon' icon={CopyIcon} />
           </div>
 
           <div className='space-x-3 bg-card p-5'>
@@ -552,7 +552,7 @@ function Demo(): JSX.Element {
               ghost
             </Button>
 
-            <IconButton size='small' icon={CopyIcon} />
+            <IconButton size='smallIcon' icon={CopyIcon} />
           </div>
 
           <Card>
