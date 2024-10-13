@@ -146,7 +146,7 @@ function CardDemo2({ className, ...props }: CardProps) {
 
 function Demo(): JSX.Element {
   return (
-    <>
+    <div>
       <span>
         <Avatar>
           <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
@@ -807,6 +807,6 @@ function Demo(): JSX.Element {
           </div>
         </div>
       </>
-    </>
+    </div>
   );
 }
