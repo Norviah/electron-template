@@ -1,4 +1,4 @@
-import { useTheme } from 'next-themes';
+import { useTheme } from './ThemeProvider';
 import { Toaster as BaseToastProvider } from 'sonner';
 
 type ToasterProps = React.ComponentProps<typeof BaseToastProvider>;

@@ -27,7 +27,7 @@ if (!rootElement.innerHTML) {
 
   root.render(
     <StrictMode>
-      <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+      <ThemeProvider defaultTheme='system' storageKey='theme'>
         <t.Provider client={trpcClient} queryClient={queryClient}>
           <QueryClientProvider client={queryClient}>
             <RouterProvider router={router} />

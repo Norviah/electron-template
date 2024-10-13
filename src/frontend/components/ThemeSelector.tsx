@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/Select';
-import { useTheme } from 'next-themes';
+import { type Theme, useTheme } from './ThemeProvider';
 
 export function ThemeSelector() {
   const { theme, setTheme } = useTheme();
@@ -14,7 +14,7 @@ export function ThemeSelector() {
   return (
     <Select
       value={theme}
-      onValueChange={(newTheme) => {
+      onValueChange={(newTheme: Theme) => {
         if (newTheme !== theme) {
           setTheme(newTheme);
         }
