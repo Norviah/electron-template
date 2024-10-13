@@ -19,8 +19,10 @@ function createWindow(): void {
       preload: join(__dirname, '../preload/preload.js'),
       sandbox: false
     },
-
-
+    minHeight: 670,
+    minWidth: 900,
+    frame:false,
+    titleBarStyle: "hidden"
   })
 
     // create and attach the ipc handler
