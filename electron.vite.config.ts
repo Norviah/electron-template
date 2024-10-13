@@ -17,14 +17,21 @@ export default defineConfig({
     }
   },
   renderer: {
+    root: "src/frontend",
     resolve: {
       alias: {
-        '@renderer': resolve('src/renderer')
+        '@frontend': resolve('src/frontend')
+      }
+    },
+    build: {
+      outDir: "out/renderer",
+      rollupOptions: {
+        input: "./src/frontend/index.html"
       }
     },
     plugins: [TanStackRouterVite({
-      routesDirectory: "./src/renderer/routes",
-      generatedRouteTree: "./src/renderer/routeTree.gen.ts",
+      routesDirectory: "./src/frontend/routes",
+      generatedRouteTree: "./src/frontend/routeTree.gen.ts",
       routeFileIgnorePrefix: "-",
       quoteStyle: "single" 
     }), react()]

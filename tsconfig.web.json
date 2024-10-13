@@ -2,11 +2,11 @@
   "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
   "include": [
     "src/preload/*.d.ts", 
-    "src/renderer/**/*.d.ts",
-    "src/renderer/**/*.tsx",
-    "src/renderer/**/*.ts",
-    "src/renderer/components",
-    "src/renderer/lib",
+    "src/frontend/**/*.d.ts",
+    "src/frontend/**/*.tsx",
+    "src/frontend/**/*.ts",
+    "src/frontend/components",
+    "src/frontend/lib",
     "src/main/preload.d.ts"
   ],
   "compilerOptions": {
@@ -15,8 +15,8 @@
     "baseUrl": ".",
     "moduleResolution": "Bundler",
     "paths": {
-      "@renderer/*": [
-        "src/renderer/*"
+      "@frontend/*": [
+        "src/frontend/*"
       ]
     }
   }
