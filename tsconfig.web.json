@@ -7,7 +7,7 @@
     "src/frontend/**/*.ts",
     "src/frontend/components",
     "src/frontend/lib",
-    "src/main/preload.d.ts"
+    "src/backend/preload.d.ts"
   ],
   "compilerOptions": {
     "composite": true,

@@ -6,13 +6,19 @@ import { resolve } from 'node:path';
 
 export default defineConfig({
   main: {
-    plugins: [externalizeDepsPlugin()]
+    plugins: [externalizeDepsPlugin()],
+    build: {
+      outDir: "out/main",
+      lib: {
+        entry: "src/backend/index.ts"
+      },
+    }
   },
   preload: {
     plugins: [externalizeDepsPlugin()],
     build: {
       lib: { 
-        entry: "src/main/preload.ts"
+        entry: "src/backend/preload.ts"
       },
     }
   },
