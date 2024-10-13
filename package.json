@@ -21,9 +21,7 @@
     "lint": "biome lint ./src",
     "lint:apply": "biome lint ./src --apply",
     "start": "electron-vite preview",
-    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
-    "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
-    "typecheck": "pnpm run typecheck:node && pnpm run typecheck:web",
+    "typecheck": "tsc --noEmit -p tsconfig.json --composite false",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {

@@ -1,4 +1,27 @@
 {
-  "files": [],
-  "references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.web.json" }]
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "lib": ["DOM", "ESNext"],
+    "jsx": "react-jsx",
+    "strict": true,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "paths": {
+      "@frontend/*": ["src/frontend/*"],
+      "@shared/*": ["src/shared/*"],
+      "@backend/*": ["src/backend/*"]
+    }
+  },
+  "include": [
+    "src/backend/**/*.ts",
+    "src/backend/**/*.d.ts",
+    "src/shared/**/*.ts",
+    "src/frontend/**/*.d.ts",
+    "src/frontend/**/*.tsx",
+    "src/frontend/**/*.ts"
+  ],
 }
