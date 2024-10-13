@@ -4,7 +4,7 @@ import { cn } from '@renderer/lib/utils';
 import { cva } from 'class-variance-authority';
 
 import type { VariantProps } from 'class-variance-authority';
-import { type LucideIcon, SearchIcon } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import type { RequireExactlyOne } from 'type-fest';
 
 import * as React from 'react';
@@ -78,4 +78,4 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
 );
 IconButton.displayName = 'IconButton';
 
-export { IconButton, Button, buttonVariants };
+export { Button, buttonVariants, IconButton };
