@@ -9,7 +9,12 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin()]
   },
   preload: {
-    plugins: [externalizeDepsPlugin()]
+    plugins: [externalizeDepsPlugin()],
+    build: {
+      lib: { 
+        entry: "src/main/preload.ts"
+      },
+    }
   },
   renderer: {
     resolve: {

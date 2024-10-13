@@ -6,7 +6,8 @@
     "src/renderer/**/*.tsx",
     "src/renderer/**/*.ts",
     "src/renderer/components",
-    "src/renderer/lib" 
+    "src/renderer/lib",
+    "src/main/preload.d.ts"
   ],
   "compilerOptions": {
     "composite": true,
