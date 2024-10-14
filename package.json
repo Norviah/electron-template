@@ -77,6 +77,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.3",
     "@electron-toolkit/tsconfig": "^1.0.1",
     "@tanstack/router-devtools": "^1.64.2",
     "@tanstack/router-plugin": "^1.64.0",
