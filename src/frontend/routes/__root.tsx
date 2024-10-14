@@ -1,3 +1,4 @@
+import { BreakpointIndicator } from '@frontend/components/BreakpointIndicator';
 import { Link } from '@frontend/components/Link';
 import { TitleBar } from '@frontend/components/TitleBar';
 import { ScrollArea, ScrollBar } from '@frontend/components/ui/ScrollArea';
@@ -26,7 +27,13 @@ export const Route = createRootRoute({
           </div>
 
           <Outlet />
-          {window.location.hostname === 'localhost' && <TanStackRouterDevtools />}
+
+          {window.location.hostname === 'localhost' && (
+            <>
+              <TanStackRouterDevtools position='bottom-right' />
+              <BreakpointIndicator />
+            </>
+          )}
         </div>
 
         <ScrollBar orientation='vertical' className='w-2' />
