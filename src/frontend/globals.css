@@ -348,14 +348,13 @@
   .light {
     --background: 0 0% 97%;
     --foreground-light: 0 0% 40%;
-    --foreground: 0 0% 7%;
-
+    
     --foreground: var(--neutral-600);
-    --foreground: 0 0% 23%;
-
-    --foreground-light: var(--newspaper-light);
-    --foreground-light: 0 0% 35%;
-    --foreground-lighter: 0 0% 60%;
+    --foreground: 0 0% 20%;
+    
+    --foreground: 0 0% 10%;
+    --foreground-light: 0 0% 50%;
+    --foreground-lighter: 0 0% 75%;
 
     /* --foreground-muted:var(--colors-gray-dark-900);
     --foreground-lighter:var(--colors-gray-dark-1000);
