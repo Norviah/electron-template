@@ -1,5 +1,5 @@
-import { useTheme } from './ThemeProvider';
 import { Toaster as BaseToastProvider } from 'sonner';
+import { useTheme } from './ThemeProvider';
 
 type ToasterProps = React.ComponentProps<typeof BaseToastProvider>;
 

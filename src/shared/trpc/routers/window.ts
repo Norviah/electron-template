@@ -1,4 +1,4 @@
-import { publicProcedure, router } from ".."
+import { publicProcedure, router } from '..';
 
 export const windowRouter = router({
   closeWindow: publicProcedure.mutation(async ({ ctx }) => {

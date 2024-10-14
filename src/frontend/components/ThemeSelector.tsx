@@ -1,3 +1,4 @@
+import { type Theme, useTheme } from './ThemeProvider';
 import {
   Select,
   SelectContent,
@@ -6,7 +7,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/Select';
-import { type Theme, useTheme } from './ThemeProvider';
 
 export function ThemeSelector() {
   const { theme, setTheme } = useTheme();

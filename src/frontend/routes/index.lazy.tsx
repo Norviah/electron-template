@@ -10,7 +10,7 @@ function Index() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className='flex flex-col gap-2 w-20'>
+    <div className='flex w-20 flex-col gap-2'>
       <Button variant='outline' onClick={() => setCount((prev) => prev + 1)}>
         Count: {count}
       </Button>

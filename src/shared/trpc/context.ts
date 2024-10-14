@@ -1,5 +1,5 @@
-import { BrowserWindow } from "electron";
-import type { inferAsyncReturnType } from "@trpc/server";
+import type { inferAsyncReturnType } from '@trpc/server';
+import { BrowserWindow } from 'electron';
 
 export async function createContext() {
   const browserWindow = BrowserWindow.getFocusedWindow();
