@@ -1,6 +1,6 @@
 import { Link } from '@frontend/components/Link';
 import { TitleBar } from '@frontend/components/TitleBar';
-import { ScrollArea } from '@frontend/components/ui/ScrollArea';
+import { ScrollArea, ScrollBar } from '@frontend/components/ui/ScrollArea';
 import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 
@@ -9,8 +9,8 @@ export const Route = createRootRoute({
     <div className='flex h-screen flex-col text-foreground-light'>
       <TitleBar />
 
-      <ScrollArea className='container flex-grow'>
-        <div className='space-y-5'>
+      <ScrollArea className='flex-grow'>
+        <div className='container space-y-5'>
           <div className='space-x-2'>
             <Link to='/' className='[&.active]:text-foreground'>
               Home
@@ -28,6 +28,8 @@ export const Route = createRootRoute({
           <Outlet />
           <TanStackRouterDevtools />
         </div>
+
+        <ScrollBar orientation='vertical' className='w-2' />
       </ScrollArea>
     </div>
   ),
