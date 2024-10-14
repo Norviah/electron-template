@@ -26,7 +26,7 @@ export const Route = createRootRoute({
           </div>
 
           <Outlet />
-          <TanStackRouterDevtools />
+          {window.location.hostname === 'localhost' && <TanStackRouterDevtools />}
         </div>
 
         <ScrollBar orientation='vertical' className='w-2' />
