@@ -1,17 +1,20 @@
-import { join } from 'node:path';
-import { electronApp, is, optimizer } from '@electron-toolkit/utils';
-import { BrowserWindow, app, shell } from 'electron';
 import icon from '../../resources/icon.png';
 
+import { join } from 'node:path';
+import { electronApp, is, optimizer } from '@electron-toolkit/utils';
 import { createContext } from '@shared/trpc/context';
 import { appRouter } from '@shared/trpc/routers';
+import { BrowserWindow, app, shell } from 'electron';
 import { createIPCHandler } from 'electron-trpc/main';
+import { settings } from './lib/settings';
+import { debounce } from './lib/utils';
+
+const { width, height } = settings.get('dimensions');
 
 function createWindow(): void {
-  // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width,
+    height,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -38,6 +41,13 @@ function createWindow(): void {
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
   });
+
+  function saveWindowDimensions() {
+    const [width, height] = mainWindow.getSize();
+    settings.set('dimensions', { width, height });
+  }
+
+  mainWindow.on('resize', debounce(saveWindowDimensions, 500));
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url);
