@@ -45,9 +45,8 @@ export function Link({ className, text, children, to, ...props }: LinkProps): JS
 
   return (
     <Component
-      // @ts-expect-error
-      to={to}
-      href={to}
+      to={Component === 'a' ? undefined : (to as BaseLinkProps['to'])}
+      href={Component === 'a' ? to : undefined}
       className={cn(
         typeof render === 'string' &&
           'text-foreground-light underline underline-offset-4 transition-colors hover:text-foreground',
