@@ -1,8 +1,4 @@
 export function BreakpointIndicator(): JSX.Element | null {
-  // if (window.location.hostname !== 'localhost') {
-  //   return null;
-  // }
-
   return (
     <div className='fixed bottom-1 left-1 z-50 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-card p-4 font-mono text-foreground text-xs shadow-xl'>
       <div className='block sm:hidden'>xs</div>
