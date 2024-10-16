@@ -4,7 +4,7 @@ import { electronApp, is, optimizer } from '@electron-toolkit/utils';
 import { BrowserWindow, app, ipcMain, shell } from 'electron';
 import { join } from 'node:path';
 import { settings } from './lib/settings';
-import { debounce, registerIPC } from './lib/utils';
+import { debounce, registerHandlers, registerIPC } from './lib/utils';
 
 import * as api from './systems/ipc';
 
@@ -71,6 +71,7 @@ app.whenReady().then(() => {
   });
 
   registerIPC(ipcMain, api.events);
+  registerHandlers(ipcMain, api.handlers);
 
   createWindow();
 

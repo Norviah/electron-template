@@ -1,6 +1,6 @@
 import { ipcRenderer, type IpcMain } from 'electron';
 import type { PartialDeep } from 'type-fest';
-import type { API, Events } from '../types/ipc';
+import type { API, APII, Events, Handlers } from '../types/ipc';
 
 /**
  * Returns a debounced version of the provided function, ensuring that the
@@ -101,12 +101,22 @@ export function merge<T extends Record<string, unknown>>(source: T, overrides: P
   return result;
 }
 
-export function registerIPC(ipc: IpcMain, events: Events) {
+export function registerIPC(ipc: IpcMain, events: Events): void {
   for (const key in events) {
     if (typeof events[key] === 'function') {
       ipc.on(key, events[key]);
     } else {
       registerIPC(ipc, events[key]);
+    }
+  }
+}
+
+export function registerHandlers(ipc: IpcMain, handlers: Handlers): void {
+  for (const key in handlers) {
+    if (typeof handlers[key] === 'function') {
+      ipc.handle(key, handlers[key]);
+    } else {
+      registerHandlers(ipc, handlers[key]);
     }
   }
 }
@@ -125,4 +135,20 @@ export function generateAPI<E extends Events>(events: E): API<E> {
   }
 
   return api as API<E>;
+}
+
+export function generateHandlers<H extends Handlers>(events: H): APII<H> {
+  const api: Record<string, unknown> = {};
+
+  for (const key in events) {
+    const value = events[key];
+
+    if (typeof value === 'function') {
+      api[key] = (...args: unknown[]) => ipcRenderer.invoke(key, ...args);
+    } else {
+      api[key] = generateHandlers(value);
+    }
+  }
+
+  return api as APII<H>;
 }
