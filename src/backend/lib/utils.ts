@@ -1,20 +1,18 @@
-import { ipcRenderer, type IpcMain } from 'electron';
 import type { PartialDeep } from 'type-fest';
-import type { API, APII, Events, Handlers } from '../types/ipc';
 
 /**
- * Returns a debounced version of the provided function, ensuring that the
- * function is only called after a specified delay.
+ * Debounces the provided function, ensuring that the function is only called
+ * after a delay.
  *
  * This function delays the execution of the provided function until after a
  * specified amount of time has passed. If the function is called again before
- * the delay period ends, a new timeout is set, canceling the previous one.
+ * the delay, the previous timeout is cleared and a new one is set.
  *
  * This is useful for limiting the rate at which a function is executed.
  *
- * @param func The function to debounce, which will only be called after the delay.
- * @param delay The amount of time, in milliseconds, to wait before calling the function.
- * @returns The debounced function that will only be called after the delay has passed.
+ * @param func The function to debounce.
+ * @param delay The amount of time to wait before calling the function.
+ * @returns The debounced function that will only be called after the delay.
  * @example
  *
  * ```ts
@@ -22,18 +20,19 @@ import type { API, APII, Events, Handlers } from '../types/ipc';
  *   console.log('Scroll event triggered');
  * }
  *
+ * // Only called after 300ms of no scrolling.
  * window.addEventListener('scroll', debounce(handleScroll, 300));
  * ```
  */
 export function debounce(func: (...args: unknown[]) => void, delay: number) {
-  let timeoutId: NodeJS.Timeout;
+  let id: NodeJS.Timeout;
 
   return (...args: unknown[]) => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
+    if (id) {
+      clearTimeout(id);
     }
 
-    timeoutId = setTimeout(() => func(...args), delay);
+    id = setTimeout(() => func(...args), delay);
   };
 }
 
@@ -99,56 +98,4 @@ export function merge<T extends Record<string, unknown>>(source: T, overrides: P
   }
 
   return result;
-}
-
-export function registerIPC(ipc: IpcMain, events: Events): void {
-  for (const key in events) {
-    if (typeof events[key] === 'function') {
-      ipc.on(key, events[key]);
-    } else {
-      registerIPC(ipc, events[key]);
-    }
-  }
-}
-
-export function registerHandlers(ipc: IpcMain, handlers: Handlers): void {
-  for (const key in handlers) {
-    if (typeof handlers[key] === 'function') {
-      ipc.handle(key, handlers[key]);
-    } else {
-      registerHandlers(ipc, handlers[key]);
-    }
-  }
-}
-
-export function generateAPI<E extends Events>(events: E): API<E> {
-  const api: Record<string, unknown> = {};
-
-  for (const key in events) {
-    const value = events[key];
-
-    if (typeof value === 'function') {
-      api[key] = (...args: unknown[]) => ipcRenderer.send(key, ...args);
-    } else {
-      api[key] = generateAPI(value);
-    }
-  }
-
-  return api as API<E>;
-}
-
-export function generateHandlers<H extends Handlers>(events: H): APII<H> {
-  const api: Record<string, unknown> = {};
-
-  for (const key in events) {
-    const value = events[key];
-
-    if (typeof value === 'function') {
-      api[key] = (...args: unknown[]) => ipcRenderer.invoke(key, ...args);
-    } else {
-      api[key] = generateHandlers(value);
-    }
-  }
-
-  return api as APII<H>;
 }

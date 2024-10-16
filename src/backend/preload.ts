@@ -1,14 +1,9 @@
 import { contextBridge } from 'electron';
-import { generateAPI, generateHandlers } from './lib/utils';
-
-import * as api from './systems/ipc';
+import { generateAPI } from './systems/ipc';
 
 if (process.contextIsolated) {
-  contextBridge.exposeInMainWorld('api', {
-    ...generateAPI(api.events),
-    ...generateHandlers(api.handlers),
-  });
+  contextBridge.exposeInMainWorld('api', generateAPI());
 } else {
   // @ts-ignore (defined in dts)
-  window.api = generateAPI(api.events);
+  window.api = generateAPI();
 }

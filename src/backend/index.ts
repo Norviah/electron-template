@@ -4,9 +4,8 @@ import { electronApp, is, optimizer } from '@electron-toolkit/utils';
 import { BrowserWindow, app, ipcMain, shell } from 'electron';
 import { join } from 'node:path';
 import { settings } from './lib/settings';
-import { debounce, registerHandlers, registerIPC } from './lib/utils';
-
-import * as api from './systems/ipc';
+import { debounce } from './lib/utils';
+import { registerAPI } from './systems/ipc';
 
 const { width, height } = settings.get('dimensions');
 
@@ -70,9 +69,7 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window);
   });
 
-  registerIPC(ipcMain, api.events);
-  registerHandlers(ipcMain, api.handlers);
-
+  registerAPI(ipcMain);
   createWindow();
 
   app.on('activate', () => {

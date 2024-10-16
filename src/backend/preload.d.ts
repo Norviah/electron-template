@@ -1,8 +1,7 @@
-import type * as api from './systems/ipc';
-import type { API, APII } from './types/ipc';
+import type { generateAPI } from './systems/ipc';
 
 declare global {
   interface Window {
-    api: API<(typeof api)['events']> & APII<(typeof api)['handlers']>;
+    api: ReturnType<typeof generateAPI>;
   }
 }
