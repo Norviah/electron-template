@@ -1,5 +1,11 @@
-import { exposeElectronTRPC } from 'electron-trpc/main';
+import { contextBridge } from "electron";
+import { generateAPI } from "./lib/utils";
 
-process.once('loaded', () => {
-  exposeElectronTRPC();
-});
+import * as api from "./systems/ipc";
+
+if (process.contextIsolated) {
+  contextBridge.exposeInMainWorld("api", generateAPI(api.events));
+} else {
+  // @ts-ignore (defined in dts)
+  window.api = generateAPI(api.events);
+}

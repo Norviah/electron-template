@@ -1,4 +1,6 @@
+import { ipcRenderer, type IpcMain } from 'electron';
 import type { PartialDeep } from 'type-fest';
+import type { API, Events } from '../types/ipc';
 
 /**
  * Returns a debounced version of the provided function, ensuring that the
@@ -97,4 +99,30 @@ export function merge<T extends Record<string, unknown>>(source: T, overrides: P
   }
 
   return result;
+}
+
+export function registerIPC(ipc: IpcMain, events: Events) {
+  for (const key in events) {
+    if (typeof events[key] === 'function') {
+      ipc.on(key, events[key]);
+    } else {
+      registerIPC(ipc, events[key]);
+    }
+  }
+}
+
+export function generateAPI<E extends Events>(events: E): API<E> {
+  const api: Record<string, unknown> = {};
+
+  for (const key in events) {
+    const value = events[key];
+
+    if (typeof value === 'function') {
+      api[key] = (...args: unknown[]) => ipcRenderer.send(key, ...args);
+    } else {
+      api[key] = generateAPI(value);
+    }
+  }
+
+  return api as API<E>;
 }

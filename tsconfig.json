@@ -22,6 +22,7 @@
     "src/shared/**/*.ts",
     "src/frontend/**/*.d.ts",
     "src/frontend/**/*.tsx",
-    "src/frontend/**/*.ts"
+    "src/frontend/**/*.ts",
+    "src/backend/preload.d.ts"
   ],
 }

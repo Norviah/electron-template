@@ -1,13 +1,12 @@
 import icon from '../../resources/icon.png';
 
-import { join } from 'node:path';
 import { electronApp, is, optimizer } from '@electron-toolkit/utils';
-import { createContext } from '@shared/trpc/context';
-import { appRouter } from '@shared/trpc/routers';
-import { BrowserWindow, app, shell } from 'electron';
-import { createIPCHandler } from 'electron-trpc/main';
+import { BrowserWindow, app, ipcMain, shell } from 'electron';
+import { join } from 'node:path';
 import { settings } from './lib/settings';
-import { debounce } from './lib/utils';
+import { debounce, registerIPC } from './lib/utils';
+
+import * as api from './systems/ipc';
 
 const { width, height } = settings.get('dimensions');
 
@@ -26,16 +25,6 @@ function createWindow(): void {
     minWidth: 900,
     frame: false,
     titleBarStyle: 'hidden',
-  });
-
-  // create and attach the ipc handler
-  // appRouter is defined in src/shared/routers/_app.ts
-  // this is the root and all routers will be attached
-  // to that
-  createIPCHandler({
-    router: appRouter,
-    windows: [mainWindow],
-    createContext,
   });
 
   mainWindow.on('ready-to-show', () => {
@@ -81,8 +70,7 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window);
   });
 
-  // IPC test
-  // ipcMain.on('ping', () => console.log('pong'))
+  registerIPC(ipcMain, api.events);
 
   createWindow();
 

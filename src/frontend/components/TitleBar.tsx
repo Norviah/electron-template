@@ -1,22 +1,23 @@
 import { cn } from '@frontend/lib/utils';
-import { t } from '@shared/trpc/config';
 import { MinusIcon, SquareIcon, XIcon } from 'lucide-react';
 
 import type { LucideIcon } from 'lucide-react';
 
 export function TitleBar(): JSX.Element {
-  const { mutate: minimizeWindow } = t.window.minimize.useMutation();
-  const { mutate: maximizeWindow } = t.window.maximize.useMutation();
-  const { mutate: closeWindow } = t.window.closeWindow.useMutation();
-
   const buttons: (React.HTMLProps<HTMLDivElement> & {
     icon: LucideIcon;
     mutation: () => void;
   })[] = [
-    { mutation: () => minimizeWindow(), icon: MinusIcon },
-    { mutation: () => maximizeWindow(), icon: SquareIcon },
     {
-      mutation: () => closeWindow(),
+      mutation: () => window.api.window.minimize(),
+      icon: MinusIcon,
+    },
+    {
+      mutation: () => window.api.window.maximize(),
+      icon: SquareIcon,
+    },
+    {
+      mutation: () => window.api.window.close(),
       icon: XIcon,
       className: 'hover:text-destructive-foreground hover:bg-destructive',
     },
