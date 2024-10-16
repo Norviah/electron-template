@@ -1,11 +1,11 @@
-import icon from '../../resources/icon.png';
-
 import { electronApp, is, optimizer } from '@electron-toolkit/utils';
 import { BrowserWindow, app, ipcMain, shell } from 'electron';
 import { join } from 'node:path';
 import { settings } from './lib/settings';
 import { debounce } from './lib/utils';
 import { registerAPI } from './systems/ipc';
+
+import * as paths from '@shared/lib/paths';
 
 const { width, height } = settings.get('dimensions');
 
@@ -15,7 +15,7 @@ function createWindow(): void {
     height,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
+    ...(process.platform === 'linux' ? { icon: paths.ICON } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/preload.js'),
       sandbox: false,
