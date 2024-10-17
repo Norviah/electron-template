@@ -1,7 +1,8 @@
 appId: com.electron.vite
 productName: vite
+extraResources: ['./assets/**']
 directories:
-  buildResources: build
+  buildResources: assets
 files:
   - '!**/.vscode/*'
   - '!src/*'
