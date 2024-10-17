@@ -1,9 +1,11 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils';
 import { BrowserWindow, app, ipcMain, shell } from 'electron';
 import { join } from 'node:path';
+
 import { settings } from './lib/settings';
 import { debounce } from './lib/utils';
 import { registerAPI } from './systems/ipc';
+import { initializeTray } from './systems/tray';
 
 import * as paths from '@shared/lib/paths';
 
@@ -15,7 +17,7 @@ function createWindow(): void {
     height,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon: paths.ICON } : {}),
+    ...(process.platform === 'linux' ? { icon: paths.ICON_PNG } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/preload.js'),
       sandbox: false,
@@ -69,6 +71,7 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window);
   });
 
+  initializeTray();
   registerAPI(ipcMain);
   createWindow();
 

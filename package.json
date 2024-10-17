@@ -1,5 +1,6 @@
 {
   "name": "vite",
+  "productName": "Vite",
   "version": "0.0.0",
   "description": "An Electron application with React and TypeScript",
   "main": "./out/main/index.js",
