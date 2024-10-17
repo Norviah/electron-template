@@ -11,7 +11,7 @@ export const Route = createRootRoute({
       <TitleBar />
 
       <ScrollArea className='flex-grow'>
-        <div className='container space-y-5'>
+        <div className='space-y-5 px-10 py-5'>
           <div className='space-x-2'>
             <Link to='/' className='[&.active]:text-foreground'>
               Home
