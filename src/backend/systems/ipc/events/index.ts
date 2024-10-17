@@ -1,6 +1,6 @@
 import type { IpcMainEvent } from 'electron';
 
-export function ping(event: IpcMainEvent, string: string) {
+export function ping(_event: IpcMainEvent, string: string) {
   console.log(`pong: ${string}`);
 }
 
