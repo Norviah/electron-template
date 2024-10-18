@@ -1,3 +1,12 @@
+import type { LinkProps } from '@tanstack/react-router';
+
+/**
+ * Available routes within the application.
+ */
+export type Route<Paths extends string = NonNullable<LinkProps['to']>> = Paths extends `/${string}`
+  ? Paths
+  : never;
+
 /**
  * Make all properties in `T` explicitly need a value.
  *
