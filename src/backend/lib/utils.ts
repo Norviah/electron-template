@@ -1,42 +1,6 @@
 import type { PartialDeep } from 'type-fest';
 
 /**
- * Debounces the provided function, ensuring that the function is only called
- * after a delay.
- *
- * This function delays the execution of the provided function until after a
- * specified amount of time has passed. If the function is called again before
- * the delay, the previous timeout is cleared and a new one is set.
- *
- * This is useful for limiting the rate at which a function is executed.
- *
- * @param func The function to debounce.
- * @param delay The amount of time to wait before calling the function.
- * @returns The debounced function that will only be called after the delay.
- * @example
- *
- * ```ts
- * function handleScroll() {
- *   console.log('Scroll event triggered');
- * }
- *
- * // Only called after 300ms of no scrolling.
- * window.addEventListener('scroll', debounce(handleScroll, 300));
- * ```
- */
-export function debounce(func: (...args: unknown[]) => void, delay: number) {
-  let id: NodeJS.Timeout;
-
-  return (...args: unknown[]) => {
-    if (id) {
-      clearTimeout(id);
-    }
-
-    id = setTimeout(() => func(...args), delay);
-  };
-}
-
-/**
  * Deeply merges two objects.
  *
  * This function recursively merges properties from two objects, overriding

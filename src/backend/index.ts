@@ -1,61 +1,10 @@
-import { electronApp, is, optimizer } from '@electron-toolkit/utils';
-import { BrowserWindow, app, ipcMain, shell } from 'electron';
-import { join } from 'node:path';
+import { electronApp, optimizer } from '@electron-toolkit/utils';
+import { BrowserWindow, app, ipcMain } from 'electron';
 
-import { settings } from './lib/settings';
-import { debounce } from './lib/utils';
 import { registerAPI } from './systems/ipc';
 import { initializeTray } from './systems/tray';
 
-import * as paths from '@shared/lib/paths';
-
-const { width, height } = settings.get('dimensions');
-
-function createWindow(): void {
-  const mainWindow = new BrowserWindow({
-    width,
-    height,
-    show: false,
-    autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon: paths.ICON_PNG } : {}),
-    webPreferences: {
-      preload: join(__dirname, '../preload/preload.js'),
-      sandbox: false,
-    },
-    minHeight: 670,
-    minWidth: 900,
-    frame: false,
-    titleBarStyle: 'hidden',
-  });
-
-  mainWindow.on('ready-to-show', () => {
-    mainWindow.show();
-  });
-
-  function saveWindowDimensions() {
-    const [width, height] = mainWindow.getSize();
-    settings.set('dimensions', { width, height });
-  }
-
-  mainWindow.on('resize', debounce(saveWindowDimensions, 500));
-
-  mainWindow.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url);
-    return { action: 'deny' };
-  });
-
-  if (is.dev) {
-    mainWindow.webContents.openDevTools();
-  }
-
-  // HMR for renderer base on electron-vite cli.
-  // Load the remote URL for development or the local html file for production.
-  if (is.dev && process.env.ELECTRON_RENDERER_URL) {
-    mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL);
-  } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'));
-  }
-}
+import * as windows from './systems/window';
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -73,12 +22,15 @@ app.whenReady().then(() => {
 
   initializeTray();
   registerAPI(ipcMain);
-  createWindow();
+
+  windows.main.open();
 
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+    if (BrowserWindow.getAllWindows().length === 0) {
+      windows.main.open();
+    }
   });
 });
 
@@ -90,6 +42,3 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
-
-// In this file you can include the rest of your app"s specific main process
-// code. You can also put them in separate files and require them here.
