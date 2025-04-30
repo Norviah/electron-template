@@ -1,19 +1,18 @@
-appId: com.electron.vite
-productName: vite
-extraResources: ['./assets/**']
+appId: com.electron.app
+productName: electron-template
 directories:
-  buildResources: assets
+  buildResources: build
 files:
   - '!**/.vscode/*'
   - '!src/*'
   - '!electron.vite.config.{js,ts,mjs,cjs}'
-  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.eslintcache,eslint.config.mjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
   - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
 asarUnpack:
   - resources/**
 win:
-  executableName: vite
+  executableName: electron-template
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

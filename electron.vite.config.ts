@@ -1,57 +1,20 @@
-import react from '@vitejs/plugin-react';
-
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
-import { defineConfig, externalizeDepsPlugin } from 'electron-vite';
-import { resolve } from 'node:path';
+import { resolve } from 'path'
+import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   main: {
-    plugins: [externalizeDepsPlugin()],
-    build: {
-      outDir: 'out/main',
-      lib: {
-        entry: 'src/backend/index.ts',
-      },
-    },
-    resolve: {
-      alias: {
-        '@frontend': resolve('src/frontend'),
-        '@backend': resolve('src/backend'),
-        '@shared': resolve('src/shared'),
-      },
-    },
+    plugins: [externalizeDepsPlugin()]
   },
   preload: {
-    plugins: [externalizeDepsPlugin()],
-    build: {
-      lib: {
-        entry: 'src/backend/preload.ts',
-      },
-    },
+    plugins: [externalizeDepsPlugin()]
   },
   renderer: {
-    root: 'src/frontend',
     resolve: {
       alias: {
-        '@frontend': resolve('src/frontend'),
-        '@backend': resolve('src/backend'),
-        '@shared': resolve('src/shared'),
-      },
+        '@renderer': resolve('src/renderer/src')
+      }
     },
-    build: {
-      outDir: 'out/renderer',
-      rollupOptions: {
-        input: './src/frontend/index.html',
-      },
-    },
-    plugins: [
-      TanStackRouterVite({
-        routesDirectory: './src/frontend/routes',
-        generatedRouteTree: './src/frontend/routeTree.gen.ts',
-        routeFileIgnorePrefix: '-',
-        quoteStyle: 'single',
-      }),
-      react(),
-    ],
-  },
-});
+    plugins: [react()]
+  }
+})
