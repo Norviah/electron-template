@@ -1,8 +1,8 @@
 import "./assets/main.css";
 
-import App from "./App";
-
 import { StrictMode } from "react";
+import { App } from "./App";
+
 import { createRoot } from "react-dom/client";
 
 const root: HTMLElement | null = document.getElementById("root");

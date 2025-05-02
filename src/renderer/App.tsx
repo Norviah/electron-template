@@ -1,7 +1,7 @@
 import electronLogo from "./assets/electron.svg";
 import Versions from "./components/Versions";
 
-function App(): React.JSX.Element {
+export function App(): React.JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send("ping");
 
   return (
@@ -32,5 +32,3 @@ function App(): React.JSX.Element {
     </>
   );
 }
-
-export default App;
