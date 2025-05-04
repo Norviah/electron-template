@@ -1,96 +1,96 @@
 {
-	"tasks": {
-		"pre": [
-			{
-				"name": "Checking linting",
-				"command": "pnpm run lint:check"
-			},
-			{
-				"name": "Checking formatting",
-				"command": "pnpm run format:check"
-			},
-			{
-				"name": "Checking typings",
-				"command": "pnpm run build"
-			}
-		],
-		"post": [
-			{
-				"name": "Deleting old build",
-				"command": "rm -rf dist"
-			},
-			{
-				"name": "Building application",
-				"command": "pnpm run build:win"
-			},
-			{
-				"name": "Pushing",
-				"command": "git push --follow-tags"
-			},
-			{
-				"name": "Publishing release",
-				"command": "gh release create v{{newVersion}} dist/*.yml dist/*.exe dist/*.blockmap"
-			}
-		]
-	},
-	"provider": {
-		"type": "json",
-		"path": "package.json",
-		"key": "version"
-	},
-	"types": [
-		{
-			"type": "feat",
-			"name": "Features",
-			"hidden": false
-		},
-		{
-			"type": "fix",
-			"name": "Bug Fixes",
-			"hidden": false
-		},
-		{
-			"type": "revert",
-			"name": "Reverted",
-			"hidden": false
-		},
-		{
-			"type": "refactor",
-			"name": "Refactor",
-			"hidden": false
-		},
-		{
-			"type": "build",
-			"name": "Build System",
-			"hidden": false
-		},
-		{
-			"type": "init",
-			"name": "Init",
-			"hidden": false
-		},
-		{
-			"type": "remove",
-			"name": "Removed Features",
-			"hidden": false
-		},
-		{
-			"type": "chore",
-			"hidden": true
-		},
-		{
-			"type": "docs",
-			"hidden": true
-		}
-	],
-	"prompt": false,
-	"unreleasedHeader": "Unreleased",
-	"breakingHeader": "⚠ Breaking Changes",
-	"includeBody": false,
-	"includeNonConventionalCommits": true,
-	"tag": "v{{newVersion}}",
-	"releaseSubject": "chore(release): {{tag}}",
-	"changelogSubject": "docs(changelog): {{tag}}",
-	"commitOrder": "default",
+  "tasks": {
+    "pre": [
+      {
+        "name": "Checking linting",
+        "command": "pnpm run lint:check"
+      },
+      {
+        "name": "Checking formatting",
+        "command": "pnpm run format:check"
+      },
+      {
+        "name": "Checking typings",
+        "command": "pnpm run build"
+      }
+    ],
+    "post": [
+      {
+        "name": "Deleting old build",
+        "command": "rm -rf dist"
+      },
+      {
+        "name": "Building application",
+        "command": "pnpm run build:win"
+      },
+      {
+        "name": "Pushing",
+        "command": "git push --follow-tags"
+      },
+      {
+        "name": "Publishing release",
+        "command": "gh release create v{{newVersion}} dist/*.yml dist/*.exe dist/*.blockmap"
+      }
+    ]
+  },
+  "provider": {
+    "type": "json",
+    "path": "package.json",
+    "key": "version"
+  },
+  "types": [
+    {
+      "type": "feat",
+      "name": "Features",
+      "hidden": false
+    },
+    {
+      "type": "fix",
+      "name": "Bug Fixes",
+      "hidden": false
+    },
+    {
+      "type": "revert",
+      "name": "Reverted",
+      "hidden": false
+    },
+    {
+      "type": "refactor",
+      "name": "Refactor",
+      "hidden": false
+    },
+    {
+      "type": "build",
+      "name": "Build System",
+      "hidden": false
+    },
+    {
+      "type": "init",
+      "name": "Init",
+      "hidden": false
+    },
+    {
+      "type": "remove",
+      "name": "Removed Features",
+      "hidden": false
+    },
+    {
+      "type": "chore",
+      "hidden": true
+    },
+    {
+      "type": "docs",
+      "hidden": true
+    }
+  ],
+  "prompt": false,
+  "unreleasedHeader": "Unreleased",
+  "breakingHeader": "⚠ Breaking Changes",
+  "includeBody": false,
+  "includeNonConventionalCommits": true,
+  "tag": "v{{newVersion}}",
+  "releaseSubject": "chore(release): {{tag}}",
+  "changelogSubject": "docs(changelog): {{tag}}",
+  "commitOrder": "default",
   "initialCommit": "0c32b7a"
 }

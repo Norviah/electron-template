@@ -22,7 +22,7 @@
       ]
     },
 
-      {
+    {
       "name": "@theme",
       "description": "Use the @theme directive to design a token to map directly to a utility class.",
       "references": [
