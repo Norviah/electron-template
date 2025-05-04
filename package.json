@@ -4,6 +4,15 @@
 	"description": "A template Electron application with React and TypeScript",
 	"main": "./out/main/index.js",
 	"private": "true",
+  "homepage": "https://github.com/norviah/electron-template#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/norviah/electron-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/norviah/electron-template/issues"
+  },
 	"scripts": {
     "check": "biome check --write",
     "format:write": "biome format --write",
